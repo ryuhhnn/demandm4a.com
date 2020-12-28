@@ -1,0 +1,33 @@
+version: "3"
+
+volumes:
+  postgres_data:
+    driver: local
+  strapi_data:
+    driver: local
+
+services:
+  strapi:
+    image: strapi/strapi:3.4.0
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: strapi
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: strapi
+    volumes:
+      - strapi_data:/srv/app
+    ports:
+      - "1337:1337"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
+    volumes:
+      - postgres_data:/var/lib/postgresql/data

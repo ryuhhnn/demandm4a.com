@@ -1,0 +1,25 @@
+@import "variables.scss";
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 7rem;
+
+  @media all and (max-width: $laptop) {
+    font-size: 5rem;
+  }
+
+  @media all and (max-width: $tablet) {
+    font-size: 3rem;
+  }
+
+  @media all and (max-width: $phone) {
+    font-size: 2rem;
+  }
+}
