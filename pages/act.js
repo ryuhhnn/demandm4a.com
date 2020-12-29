@@ -1,6 +1,7 @@
 import { fetchCMS } from "../lib/cms";
 import { markdownToHtml } from "../lib/helpers";
 import ReactHtmlParser from "react-html-parser";
+import "../styles/Act.module.scss";
 
 export default function Act({ data }) {
   return (
