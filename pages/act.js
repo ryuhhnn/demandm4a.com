@@ -3,7 +3,17 @@ import { markdownToHtml } from "../lib/helpers";
 import ReactHtmlParser from "react-html-parser";
 import "../styles/Act.module.scss";
 
-export default function Act({ data }) {
+export default function Act({ data, errors }) {
+  if (errors) {
+    return (
+      <>
+        {errors.map((error) => (
+          <span>{error}</span>
+        ))}
+      </>
+    );
+  }
+
   return (
     <>
       <h1>{data.title}</h1>
@@ -23,6 +33,14 @@ export default function Act({ data }) {
 export async function getServerSideProps() {
   const data = await fetchCMS("/act");
   const actions = [];
+
+  if (data.errors) {
+    return {
+      props: {
+        errors: data.errors,
+      },
+    };
+  }
 
   await Promise.all(
     data.actions.map(async (action) => {
